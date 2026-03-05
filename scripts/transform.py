@@ -1,4 +1,3 @@
-
 import pandas as pd
 from pathlib import Path
 
@@ -36,10 +35,13 @@ if not input_path.exists():
     raise FileNotFoundError(f"No se encontró el archivo: {input_path}")
 
 # =====================================
-# Lectura del archivo
+# Lectura del archivo (solo hoja Avances)
 # =====================================
 
-df = pd.read_excel(input_path)
+try:
+    df = pd.read_excel(input_path, sheet_name="Avances")
+except ValueError:
+    raise ValueError("La hoja 'Avances' no existe en el archivo Excel.")
 
 # =====================================
 # Normalización de nombres de columnas
