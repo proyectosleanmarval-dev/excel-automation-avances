@@ -14,10 +14,17 @@ output_csv = Path("data/transformed/estadoObra_filtrado.csv")
 # =====================================
 
 columnas_requeridas = [
-    "SUC",
-    "HC",
-    "Nombre"    
-
+    "descSucursal",
+    "descProyecto",
+    "hc",
+    "Actividad",
+    "tipoRestriccion",
+    "nomAcuerdoServ",
+    "Responsable",
+    "fechaRegistro",
+    "FechaCompromisoInicial",
+    "FecLegalizacion",
+    "FecInicioFabricacion"
 ]
 
 # =====================================
@@ -32,9 +39,9 @@ if not input_path.exists():
 # =====================================
 
 try:
-    df = pd.read_excel(input_path, sheet_name="Avances")
+    df = pd.read_excel(input_path, sheet_name="Restricciones")
 except ValueError:
-    raise ValueError("La hoja 'Avances' no existe en el archivo Excel.")
+    raise ValueError("La hoja 'Restricciones' no existe en el archivo Excel.")
 
 # =====================================
 # Normalización de nombres de columnas
@@ -46,9 +53,9 @@ df.columns = df.columns.astype(str).str.strip()
 # Validar columna de filtro
 # =====================================
 
-if "SUC" not in df.columns:
+if "descSucursal" not in df.columns:
     raise ValueError(
-        f"La columna 'SUC' no existe. "
+        f"La columna 'descSucursal' no existe. "
         f"Columnas encontradas: {list(df.columns)}"
     )
 
@@ -57,9 +64,9 @@ if "SUC" not in df.columns:
 # =====================================
 
 df_filtrado = df[
-    df["SUC"]
+    df["descSucursal"]
     .astype(str)
-    .str.upper() == "Sucursal BOGOTÃ"
+    .str.upper() == "BOGOTA "
 ]
 
 # =====================================
