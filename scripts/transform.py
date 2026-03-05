@@ -14,17 +14,10 @@ output_csv = Path("data/transformed/estadoObra_filtrado.csv")
 # =====================================
 
 columnas_requeridas = [
-    "descSucursal",
-    "descProyecto",
-    "hc",
-    "Actividad",
-    "tipoRestriccion",
-    "nomAcuerdoServ",
-    "Responsable",
-    "fechaRegistro",
-    "FechaCompromisoInicial",
-    "FecLegalizacion",
-    "FecInicioFabricacion"
+    "SUC",
+    "HC",
+    "Nombre"    
+
 ]
 
 # =====================================
@@ -53,9 +46,9 @@ df.columns = df.columns.astype(str).str.strip()
 # Validar columna de filtro
 # =====================================
 
-if "descSucursal" not in df.columns:
+if "SUC" not in df.columns:
     raise ValueError(
-        f"La columna 'descSucursal' no existe. "
+        f"La columna 'SUC' no existe. "
         f"Columnas encontradas: {list(df.columns)}"
     )
 
@@ -64,9 +57,9 @@ if "descSucursal" not in df.columns:
 # =====================================
 
 df_filtrado = df[
-    df["descSucursal"]
+    df["SUC"]
     .astype(str)
-    .str.upper() == "BOGOTA "
+    .str.upper() == "Sucursal BOGOTÃ"
 ]
 
 # =====================================
